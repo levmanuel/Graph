@@ -1,2 +1,2 @@
 # Graph
-Understanding Graph and apply DS
+Understanding Graph and data science opportunities

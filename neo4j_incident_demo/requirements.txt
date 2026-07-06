@@ -1,0 +1,10 @@
+# Cœur de la pipeline (generate_incidents.py, extract_entities.py) : AUCUNE
+# dépendance — uniquement la bibliothèque standard Python 3.
+#
+# Les paquets ci-dessous ne servent QUE :
+#   - neo4j       : chargement direct via Bolt (load_neo4j.py)
+#   - networkx    : construction/visualisation du graphe dans le notebook
+#   - matplotlib  : rendu des visualisations du notebook
+neo4j>=5.0
+networkx>=3.0
+matplotlib>=3.7

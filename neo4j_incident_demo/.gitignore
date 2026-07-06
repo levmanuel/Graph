@@ -1,0 +1,12 @@
+# Artefacts générés par la pipeline (reproductibles via les scripts)
+data/*.json
+incidents.cypher
+
+# Volumes / données Neo4j locales
+neo4j/data/
+neo4j/logs/
+
+# Divers
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

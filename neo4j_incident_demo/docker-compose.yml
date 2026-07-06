@@ -1,0 +1,32 @@
+# Stack de démo : une instance Neo4j exposant l'interface web (Neo4j Browser)
+# et le point d'accès Bolt utilisé par load_neo4j.py.
+#
+#   docker compose up -d            # démarre Neo4j
+#   → interface web  : http://localhost:7474   (login neo4j / demopassword)
+#   → point Bolt     : bolt://localhost:7687
+#   python3 load_neo4j.py           # charge le graphe via Bolt
+#
+services:
+  neo4j:
+    image: neo4j:5
+    container_name: neo4j-incidents
+    ports:
+      - "7474:7474"   # interface web (Neo4j Browser)
+      - "7687:7687"   # protocole Bolt (driver Python)
+    environment:
+      NEO4J_AUTH: "neo4j/demopassword"
+      # Plugin APOC : utilitaires Cypher pratiques pour la démo.
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: "apoc.*"
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      # Considère la base « healthy » quand cypher-shell répond.
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p demopassword 'RETURN 1' || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 40s
+
+volumes:
+  neo4j_data:
